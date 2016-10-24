@@ -5,7 +5,8 @@ env:
 
 install:
   - go get github.com/haya14busa/reviewdog/cmd/reviewdog
+  - go get -u github.com/golang/lint/golint
 
 script:
   - >-
-    reviewdog -h
+    golint foo | reviewdog -f=golint -ci=travis

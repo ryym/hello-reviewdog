@@ -9,6 +9,7 @@ env:
 
 before_install:
   - docker build -t node-eslint .
+  - docker run --rm node-eslint --version
 
 install:
   - go get github.com/haya14busa/reviewdog/cmd/reviewdog

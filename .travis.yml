@@ -1,12 +1,18 @@
-language: go
+language: node_js
+
+node_js:
+  - "6"
+
 env:
   global:
     secure: UDNEnU8zlYvTHF4Tm7agVfpxSibTa65eLg2jsKra3lyGKUPQjwyAPmpnT/IogiVERVlpFTU8aYfwbf2e73Q7fGf3fbzU2NChl0IHpq/aCWw+KTf0R9ULCDLtyGdAQOIyeDib/3v34aZa5FTX2EcrEcHq9nL24R/xbDbLp0fAsn8PD39wYw5vAXRn7y+HYqsk03Uw72qAp7apDvtCN3VvVZtwdsWQ7pmoglaXcqDjqLpwbWAL9J+XfqHTO0t9CkKd2DWVCWuHaedtykM7OGwoohJWAcO3KnNjHkX5oeHp/Ju1ZPDuripX8rFTQTB4m9p/3J+snNFo9NgRhyT8l6hGTlWa1YVKiLQ0ZxeMuKR5S+WskhwU0BtF8u0TeIygBQp5kuJRGrBttKHrOIhy4aNyK32yoyF5hOxQd0yUV2dUDo5G3CQ8JT8VKjMOVZGdHAUsWme8oDJooHpKBjwUVESeoi2Fm4wkF0gtTYRUG6omGFSFVkJ7NlhirkpTitjJ0NuIsGRluqa2ab0YQOkIjCPzvJOXhfMIbMKLxy+dGhdO3xJFl8pO89PoU9n0BF2nVK7hw9DcBil7bzyaredrDH/7qEpsJeCvLnr/sa5Jz1nsrxjpiARIuP1hfxwXBfT4yhG1Qi7VcdaMJDWQ4z/9RKwPHB+UJfyreCFcjGbid0tHfvE=
 
+before_install:
+  - npm --version
+
 install:
-  - go get github.com/haya14busa/reviewdog/cmd/reviewdog
-  - go get -u github.com/golang/lint/golint
+  - npm install eslint
 
 script:
   - >-
-    golint foo | reviewdog -f=golint -ci=travis
+    eslint -f compact a.js | ./reviewdog -efm="%f: line %l\, col %c\, %t%.%+ - %m" -ci=travis
